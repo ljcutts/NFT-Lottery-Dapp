@@ -18,8 +18,12 @@ a {
 html {
     overflow: -moz-scrollbars-vertical; 
     overflow-y: scroll;
-    background-color: #e8f4f7;
+    background-color: #fed8b1;
 }
+
+/* .appearance-textfield{
+  appearance:
+} */
 
 @tailwind base;
 @tailwind components;

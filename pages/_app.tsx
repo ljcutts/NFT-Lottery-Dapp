@@ -1,11 +1,76 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { useEffect, useRef, useState } from "react";
+import Web3Modal from "web3modal";
+import { providers, Contract } from "ethers";
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+   const [walletConnected, setWalletConnected] = useState(false);
+  const [account, setAccount] = useState<string>('');
+
+  const web3ModalRef: any = useRef();
+
+  const getAddress = async() => {
+     const provider = await web3ModalRef.current.connect();
+     const web3Provider = new providers.Web3Provider(provider);
+     setAccount(await web3Provider.getSigner().getAddress());
+  }
+
+  const getProviderOrSigner = async (needSigner = false) => {
+    // Connect to Metamask
+    // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
+    setAccount(await web3Provider.getSigner().getAddress());
+
+    // If user is not connected to the Rinkeby network, let them know and throw an error
+    const { chainId } = await web3Provider.getNetwork();
+    if (chainId !== 4) {
+      alert("Change the network to Rinkeby");
+      throw new Error("Change network to Rinkeby");
+    }
+
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+    return web3Provider;
+  };
+
+  const connectWallet = async () => {
+    try {
+      // Get the provider from web3Modal, which in our case is MetaMask
+      // When used for the first time, it prompts the user to connect their wallet
+      await getProviderOrSigner();
+      setWalletConnected(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
+    if (!walletConnected) {
+      // Assign the Web3Modal class to the reference object by setting it's `current` value
+      // The `current` value is persisted throughout as long as this page is open
+      web3ModalRef.current = new Web3Modal({
+        network: "rinkeby",
+        providerOptions: {},
+        //  disableInjectedProvider: false,
+      });
+      connectWallet()
+    } 
+
+    
+
+  }, [walletConnected]);
+
+
   return (
-    <div className='h-screen'>
+    <div className="h-screen">
       <nav className="bg-white w-full h-14 flex justify-between px-4 shadow-sm items-center border-b border-solid border-navBottom">
-        <img src="./pancakeswap-cake-logo.svg" alt="" width="32" height="32" />
+        <img src="./eth-logo.png" alt="" width="75" height="75" />
         <div className="flex justify-between items-center">
           {/* <svg
             viewBox="0 0 24 24"
@@ -26,8 +91,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           >
             <path d="M19.43 12.98C19.47 12.66 19.5 12.34 19.5 12C19.5 11.66 19.47 11.34 19.43 11.02L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.97 19.05 5.05L16.56 6.05C16.04 5.65 15.48 5.32 14.87 5.07L14.49 2.42C14.46 2.18 14.25 2 14 2H9.99996C9.74996 2 9.53996 2.18 9.50996 2.42L9.12996 5.07C8.51996 5.32 7.95996 5.66 7.43996 6.05L4.94996 5.05C4.71996 4.96 4.45996 5.05 4.33996 5.27L2.33996 8.73C2.20996 8.95 2.26996 9.22 2.45996 9.37L4.56996 11.02C4.52996 11.34 4.49996 11.67 4.49996 12C4.49996 12.33 4.52996 12.66 4.56996 12.98L2.45996 14.63C2.26996 14.78 2.21996 15.05 2.33996 15.27L4.33996 18.73C4.45996 18.95 4.72996 19.03 4.94996 18.95L7.43996 17.95C7.95996 18.35 8.51996 18.68 9.12996 18.93L9.50996 21.58C9.53996 21.82 9.74996 22 9.99996 22H14C14.25 22 14.46 21.82 14.49 21.58L14.87 18.93C15.48 18.68 16.04 18.34 16.56 17.95L19.05 18.95C19.28 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.98ZM12 15.5C10.07 15.5 8.49996 13.93 8.49996 12C8.49996 10.07 10.07 8.5 12 8.5C13.93 8.5 15.5 10.07 15.5 12C15.5 13.93 13.93 15.5 12 15.5Z"></path>
           </svg> */}
-          <button className="rounded-2xl bg-lightGreen text-white h-8 shadow-button w-24 font-semibold ml-2">
-            Connect
+          <button onClick={connectWallet} className="rounded-2xl bg-green-400 text-white h-8 shadow-button w-24 font-semibold ml-2">
+            {walletConnected ? (
+              <p className='text-xs'>
+               {account.slice(0, 6)}...
+                {account.slice(-4)}
+              </p>
+            ) : (
+              <p> Connect </p>
+            )}
           </button>
         </div>
       </nav>
