@@ -1,25 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import { providers, Contract } from "ethers";
-
+import Link from "next/link";
 
 export default function SwapPage() {
   return (
     <>
       <div className="bg-white w-full justify-between h-12 flex px-4 shadow-sm items-center border-b border-solid border-navBottom">
         <div>
-          <div className="mr-3 cursor-pointer text-base font-normal text-red-300 mt-1 hover:bg-gray-200">
+          <div className="mr-0 cursor-pointer text-base font-normal text-red-300 mt-1 hover:bg-gray-200">
             Swap
             <div className="h-1 bg-red-500 relative top-2"></div>
           </div>
         </div>
-        <div className="mr-3 cursor-pointer text-red-300 hover:bg-gray-200">
+        <Link href="/stake">
+          <a>
+            <div className="mr-0 cursor-pointer text-red-300 hover:bg-gray-200">
+              Stake
+            </div>
+          </a>
+        </Link>
+        <div className="mr-0 cursor-pointer text-red-300 hover:bg-gray-200">
           Lottery
         </div>
-        <div className="mr-3 cursor-pointer text-red-300 hover:bg-gray-200">
+        <div className="mr-0 cursor-pointer text-red-300 hover:bg-gray-200">
           Fractionalizer
         </div>
-        <div className="mr-3 cursor-pointer text-red-300 hover:bg-gray-200">
+        <div className="mr-0 cursor-pointer text-red-300 hover:bg-gray-200">
           Marketplace
         </div>
       </div>
