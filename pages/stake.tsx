@@ -75,7 +75,7 @@ export default function StakePage() {
                 </div>
                 <div className="flex">
                   <p className="w-32 text-sm text-right text-primary md:w-64 md:text-base">
-                    Yesterday's APR
+                    Yesterdays APR
                   </p>
                 </div>
               </div>
