@@ -46,67 +46,107 @@ export default function StakePage() {
           compounding, when you unstake you will receive all the originally
           deposited SUSHI and any additional from fees.
         </div>
-        <div className="flex flex-col justify-center md:flex-row mx-auto">
-          <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
-            <div className="mb-4">
-              <div className="flex items-center justify-between w-80 h-24 max-w-xl p-4 rounded-xl md:pl-5 md:pr-7 bg-yellow-400 bg-opacity-40">
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-center mb-4 flex-nowrap md:mb-2">
-                    <p className="text-sm font-bold whitespace-nowrap md:text-lg md:leading-5 text-high-emphesis">
-                      Staking APR
-                    </p>
-                  </div>
-                  <div className="flex">
-                    <a
-                      href=""
-                      className="
+        <div className="flex flex-col w-full max-w-xl mb-4 md:m-0">
+          <div className="mb-4 flex mx-auto">
+            <div className="flex items-center justify-between w-80 h-24 max-w-xl p-4 rounded-xl md:pl-5 md:pr-7 bg-yellow-400 bg-opacity-40">
+              <div className="flex flex-col">
+                <div className="flex items-center justify-center mb-4 flex-nowrap md:mb-2">
+                  <p className="text-sm font-bold whitespace-nowrap md:text-lg md:leading-5 text-high-emphesis">
+                    Staking APR
+                  </p>
+                </div>
+                <div className="flex">
+                  <a
+                    href=""
+                    className="
                         py-1 px-4 md:py-1.5 md:px-7 rounded
                         text-xs md:text-sm font-medium md:font-bold text-dark-900
                         bg-yellow-300 hover:bg-opacity-90"
-                    >
-                      View Stats
-                    </a>
+                  >
+                    View Stats
+                  </a>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center justify-end mb-4 flex-nowrap md:mb-2">
+                  <p className="text-sm font-bold whitespace-nowrap text-right md:text-lg md:leading-5 text-high-emphesis">
+                    7.55%
+                  </p>
+                </div>
+                <div className="flex">
+                  <p className="w-32 text-sm text-right text-primary md:w-64 md:text-base">
+                    Yesterday's APR
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-375 mx-auto rounded-md  h-294 bg-red-400">
+            <div className="flex item-center w-350 h-14 rounded-md bg-yellow-300 mx-auto mt-2">
+              <div className="flex items-cente justify-center w-44">
+                <div className="flex justify-center bg-gray-400 rounded-md w-40"></div>
+                <p className="absolute flex justify-center items-center mt-4">
+                  STAKE Sushi
+                </p>
+              </div>
+              <div className="flex items-center justify-center w-44">
+                UNSTAKE
+              </div>
+            </div>
+            <div className="flex justify-between mt-4">
+              <div className="text-white font-semibold flex items-center">
+                Stake SUSHI
+              </div>
+              <div className="w-40 flex items-center justify-center h-8 rounded-3xl whitespace-nowrap text-xs font-semibold  bg-green-300">
+                1 xSUSHI = 1.2782 SUSHI
+              </div>
+            </div>
+            <input
+              className="flex mx-auto w-350 mt-4 h-14 rounded-lg bg-gray-200"
+              type="text"
+            />
+            <button className="w-350 h-14 flex mx-auto rounded-md justify-center font-bold text-xs items-center bg-red-500 mt-10">
+              Enter The Amount
+            </button>
+          </div>
+          <div className="w-375 h-64 mx-auto bg-black mt-8 rounded-md">
+            <div className="px-4 pt-6 pb-5 ">
+              <div className="w-full flex">
+                <div className="flex flex-col mr-5">
+                  <div className="text-white w-16">Balance</div>
+                  <div className="flex justify-start mt-3">
+                    <img
+                      src="./sushi-logo.webp"
+                      alt=""
+                      width="100"
+                      height="100"
+                    />
+                    <div className="flex flex-col">
+                      <div className="text-white ml-4">-</div>
+                      <div className="text-white">asdfasdf</div>
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex items-center justify-end mb-4 flex-nowrap md:mb-2">
-                    <p className="text-sm font-bold whitespace-nowrap text-right md:text-lg md:leading-5 text-high-emphesis">
-                      7.55%
-                    </p>
-                  </div>
-                  <div className="flex">
-                    <p className="w-32 text-sm text-right text-primary md:w-64 md:text-base">
-                      Yesterday's APR
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-gray-300 md:pb-9 md:pt-4 md:px-8">
-                <div className="flex w-full rounded h-14 bg-dark-800">
-                  <div className="h-full w-6/12 p-0.5">
-                    <div className="flex justify-center items-center h-full w-full rounded-lg cursor-pointer text-sm md:text-base text-high-emphesis font-bold bg-dark-900">
-                      <p>Stake SUSHI</p>
-                    </div>
-                  </div>
-                  <div className="h-full w-6/12 p-0.5">
-                    <div className="flex justify-center items-center h-full w-full rounded-lg cursor-pointer text-sm md:text-base text-secondary">
-                      <p>Unstake</p>
+                  <div className="text-white w-16">Unstaked</div>
+                  <div className="flex justify-start mt-3">
+                    <img
+                      src="./sushi-logo.webp"
+                      alt=""
+                      width="100"
+                      height="100"
+                    />
+                    <div className="flex flex-col">
+                      <div className="text-white ml-4">-</div>
+                      <div className="text-white">asdfasdf</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-between w-full mt-6">
-                <p className="font-bold text-large md:text-2xl text-high-emphesis">
-                  Stake SUSHI
-                </p>
-                <div className="border-gradient-r-pink-red-light-brown-dark-pink-red border-transparent border-solid border rounded-3xl px-4 md:px-3.5 py-1.5 md:py-0.5 text-high-emphesis text-xs font-medium md:text-base md:font-normal">
-                  1 xSUSHI = 1.2758 SUSHI
-                </div>
-              </div>
-              <input title="Token Amount" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder=" " min="0" className="relative font-bold outline-none border-none flex-auto overflow-hidden overflow-ellipsis placeholder-low-emphesis focus:placeholder-primary w-full h-14 px-3 md:px-5 mt-5 rounded bg-dark-800 text-sm md:text-lg text-dark-800 whitespace-nowrap caret-high-emphesis" value=""></input>
             </div>
+            <button className="w-350 h-14 flex mx-auto rounded-md justify-center font-bold text-xs items-center bg-red-500 mt-10">
+              Check Sushi Stats
+            </button>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import { providers, Contract } from "ethers";
 import Link from "next/link";
+import WalletConnectProvider from '@walletconnect/web3-provider'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -57,7 +58,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       // The `current` value is persisted throughout as long as this page is open
       web3ModalRef.current = new Web3Modal({
         network: "rinkeby",
-        providerOptions: {},
+        providerOptions: {
+          walletconnect: {
+          package: WalletConnectProvider,
+          options: { 
+            infuraId: process.env.NEXT_PUBLIC_INFURA_ID
+          },
+        },
+      }
         //  disableInjectedProvider: false,
       });
       connectWallet()
